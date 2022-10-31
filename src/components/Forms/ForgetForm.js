@@ -6,7 +6,7 @@ const ForgetForm = () => {
   const[user,setUser] = useState({})
   function handleSubmit(e){
     e.preventDefault();
-    axios.post("http://localhost:3000/api/auth/forgetpassword",user)
+    axios.post("http://localhost:4000/api/auth/forgetpassword",user)
     .then((res)=>console.log(res.data))
     .catch(error => console.log(error))
 
