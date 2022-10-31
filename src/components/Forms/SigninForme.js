@@ -16,10 +16,13 @@ const SigninForme = () => {
 
   function handleSubmit(e) {
     e.preventDefault();
-    axios.post("http://localhost:3000/api/auth/registre", user)
-      .then((res) => console.log(res.data))
+    axios.post("http://localhost:4000/api/auth/registre", user)
+      .then((res) => {
+        document.getElementById('err').innerHTML = res.data.message;
+        // console.log(res.data.message);
+      })
       .catch((error) => {
-        console.log(error);
+        console.log('error');
       });
   }
 
