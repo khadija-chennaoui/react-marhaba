@@ -6,7 +6,7 @@ const Blog = ({email, password,fullname}) => {
  
  const [user , setUser] = useState({})
   useEffect(()=>{
-    axios.get("http://localhost:3000/api/auth/alluser")
+    axios.get("http://localhost:4000/api/auth/alluser")
     .then(res=>{
         setUser(res.data)
         console.log(res.data)
