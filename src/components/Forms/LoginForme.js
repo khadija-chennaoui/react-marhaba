@@ -16,7 +16,7 @@ const LoginForm = () => {
   
   function handleSubmit(e) {
     e.preventDefault();
-    axios.post("http://localhost:3000/api/auth/login",user)
+    axios.post("http://localhost:4000/api/auth/login",user)
     // function replace signifie qu'il n'est pas possible d'utiliser le bouton "retour" pour revenir au document d'origine par contre "href"
     .then(() => window.location.replace("cliens"))
     .catch(Error=>console.log(Error))
