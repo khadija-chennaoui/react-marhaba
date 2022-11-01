@@ -3,7 +3,6 @@ import Button from "../../Helpers/Button";
 import axios from "axios";
 
 const SigninForme = () => {
-
   const [user, setUser] = useState({});
 
   function handleChnage(e) {
@@ -16,21 +15,26 @@ const SigninForme = () => {
 
   function handleSubmit(e) {
     e.preventDefault();
+
     axios.post("http://localhost:4000/api/auth/registre", user)
+
       .then((res) => {
-        document.getElementById('err').innerHTML = res.data.message;
-        // console.log(res.data.message);
+        if (res.data.message === "email Déja Existe") {
+          document.getElementById("err").hidden = false;
+          // document.getElementById("err").hidden = true;
+          document.getElementById("err").innerText = res.data.message;
+        } else {
+          document.getElementById("err").innerText=null
+          window.location.replace("login");}
       })
-      .catch((error) => {
-        console.log('error');
-      });
+      .catch(Error=>console.log(Error));
   }
 
   return (
     <div>
-      <p id="err"></p>
+      <p id="err" className="bg-red-400 animate-pulse shadow appearance-none border rounded w-full py-2 px-4 mt-3 mb-5 text-gray-100 leading-tight focus:outline-none focus:shadow-outline" hidden ={true}></p>
       <form className="" onSubmit={handleSubmit}>
-        <div className="flex flex-col ">
+        <div className="flex flex-col">
           <div className="mb-4">
             <label
               className="block text-gray-700 text-lg font-semibold mb-2 "
