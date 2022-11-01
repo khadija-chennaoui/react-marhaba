@@ -18,13 +18,27 @@ const LoginForm = () => {
     e.preventDefault();
     axios.post("http://localhost:4000/api/auth/login",user)
     // function replace signifie qu'il n'est pas possible d'utiliser le bouton "retour" pour revenir au document d'origine par contre "href"
-    .then(() => window.location.replace("cliens"))
-    .catch(Error=>console.log(Error))
+    .then((res) => {
+      if(res.data.message==="email incorrect"){
+        document.getElementById("err").hidden = false
+        document.getElementById("err").innerHTML = res.data.message
+        console.log(res.data.message)
+      }
+      else if(res.data.message==="password incorrect"){
+        document.getElementById("err").hidden = false
+        document.getElementById("err").innerHTML = res.data.message
+        console.log(res.data.message)
+      }
+      else 
+      window.location.replace("cliens")
+    })
+    .catch((error)=>console.log(error))
     
   }
 
   return (
     <form className="" onSubmit={handleSubmit}>
+      <p id="err" className="bg-red-400 animate-pulse shadow appearance-none border rounded w-full py-2 px-4 mt-3 mb-5 text-gray-100 leading-tight focus:outline-none focus:shadow-outline" hidden ={true}></p>
       <div className="flex flex-col ">
         <div className="mb-4">
           <label
