@@ -13,7 +13,7 @@ const ForgetPassword = () => {
               {/* <img src={logo} alt="logo" className="" /> */}
             </div>
             <div className="text-center">
-              <h3 className="text-2xl font-semibold mt-5 animate-bounce"> Modifier le password </h3>
+              <h3 className="text-2xl font-semibold mt-5 "> Modifier le password </h3>
               <h5 className="text-base mt-3">
                 à{" "}
                 <span className="text-secondary-green">Marhaba</span>

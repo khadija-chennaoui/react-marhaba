@@ -13,7 +13,7 @@ const Signin = () => {
               {/* <img src={logo} alt="logo" className="" /> */}
             </div>
             <div className="text-center">
-              <h3 className="text-2xl font-semibold mt-5 animate-bounce"> Signin </h3>
+              <h3 className="text-2xl font-semibold mt-5 "> Signin </h3>
               <h5 className="text-base mt-3">
               Créez votre compte pour continue à{" "}
                 <span className="text-secondary-green">Marhaba</span>
