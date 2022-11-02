@@ -11,6 +11,7 @@ const SigninForme = () => {
   const { register, handleSubmit , formState: { errors } } = useForm();
 
   const api = (data) => {
+    // console.log(data)
     axios.post("http://localhost:4000/api/auth/registre", data)
       .then((res) => {
         if (res.data.message === "email Déja Existe") {
@@ -39,7 +40,7 @@ const SigninForme = () => {
                 required: 'Entre your fullname',
                 pattern: {
                   value: /^[A-Za-z ]+$/i,
-                  msg: "Name not valid",
+                  message: "Name not valid",
                 },
                 minLength: {
                   value: 3,
@@ -47,7 +48,7 @@ const SigninForme = () => {
                 },
               })}
             />
-            <div><ErrorMessage errors={errors} name="fullname"/></div>
+            <div className="text-red-500"><ErrorMessage errors={errors} name="fullname"/></div>
             
           </div>
           <div className="mb-4">
@@ -69,7 +70,7 @@ const SigninForme = () => {
                 },
               })}
             />
-            <div><ErrorMessage errors={errors} name="email"/></div>
+            <div className="text-red-500"><ErrorMessage errors={errors} name="email"/></div>
 
           </div>
           <div className="mb-4">
@@ -87,11 +88,11 @@ const SigninForme = () => {
                 required: 'Enter your password',
                 minLength: {
                   value: 4,
-                  msg: "entrez au moins 4 caractères. ",
+                  message: "entrez au moins 4 caractères. ",
                 }
               })}
             />
-            <div><ErrorMessage errors={errors} name="password"/></div>
+            <div className="text-red-500"><ErrorMessage errors={errors} name="password"/></div>
 
           </div>
 

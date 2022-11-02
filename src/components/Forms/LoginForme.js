@@ -32,7 +32,8 @@ const LoginForm = () => {
         console.log(res.data.message)
       }
       else 
-      window.location.replace("cliens")
+       console.log(res.data.token)
+      // window.location.replace("cliens")
     })
     .catch((error)=>console.log(error))
     
