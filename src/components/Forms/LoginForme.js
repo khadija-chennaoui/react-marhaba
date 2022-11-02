@@ -1,4 +1,6 @@
 import React  ,{useState}from "react";
+import { Link } from "react-router-dom";
+
 import Button from "../../Helpers/Button";
 import axios from "axios";
 
@@ -82,9 +84,9 @@ const LoginForm = () => {
         </div>
         <div className="flex justify-between mt-5">
           <div className="text-secondary-green">
-            <a href="http://localhost:3001/ForgetPassword">
+            <Link to="/ForgetPassword">
               Mot de passe Oublié
-            </a>
+            </Link>
           </div>
         </div>
       </div>
