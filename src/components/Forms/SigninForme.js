@@ -1,33 +1,41 @@
 import { useState } from "react";
+// import { useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
 import Button from "../../Helpers/Button";
 import axios from "axios";
 
 const SigninForme = () => {
   const [user, setUser] = useState({});
 
-  function handleChnage(e) {
+  // const { register, trigger, formState: { errors } } = useForm();
+
+  function handleChnage(e){
+    
     const val = e.target.value;
     setUser({
       ...user,
       [e.target.name]: val,
     });
+    
   }
 
-  function handleSubmit(e) {
+  function  handleSubmit(e){
     e.preventDefault();
-
+    
     axios.post("http://localhost:4000/api/auth/registre", user)
 
       .then((res) => {
         if (res.data.message === "email Déja Existe") {
           document.getElementById("err").hidden = false;
-          // document.getElementById("err").hidden = true;
           document.getElementById("err").innerText = res.data.message;
-        } else {
+        } 
+        else if(res.data.message==="added sccssfly"){
           document.getElementById("err").innerText=null
-          window.location.replace("login");}
+          window.location.replace("login");
+        }
       })
       .catch(Error=>console.log(Error));
+      
   }
 
   return (
@@ -48,8 +56,28 @@ const SigninForme = () => {
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               id="fullname"
               type="text"
-              placeholder="fullname"
+              // {...register("fullname", {
+              //   required: true,
+              //   pattern: {
+              //     value: /^[A-Za-z ]+$/i,
+              //     msg: "Name not valid",
+              //   },
+
+              //   minLength: {
+              //     value: 3,
+              //     msg: "entrez au moins 3 caractères. ",
+              //   },
+              // })}
+              // onKeyUp={() => {
+              //   trigger("fullname");
+              // }}
             />
+            {/* {errors.fullname && (
+              <p className="text-red-500">
+                {errors.fullname.msg}
+              </p>
+            )} */}
+            
           </div>
           <div className="mb-4">
             <label
@@ -64,8 +92,23 @@ const SigninForme = () => {
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               id="email"
               type="email"
-              placeholder="Email"
+              // {...register("email", {
+              //   required: true,
+              //   pattern: {
+              //     value:
+              //       /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+              //     msg: " email address non valid",
+              //   },
+              // })}
+              // onKeyUp={() => {
+              //   trigger("email");
+              // }}
             />
+            {/* {errors.email && (
+              <p className="text-red-500">
+                {errors.email.msg}
+              </p>
+            )} */}
           </div>
           <div className="mb-4">
             <label
@@ -80,8 +123,26 @@ const SigninForme = () => {
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               id="password"
               type="password"
-              placeholder="password"
+              // {...register("password", {
+              //   required: true,
+              //   minLength: {
+              //     value: 8,
+              //     msg: "entrez au moins 8 caractères. ",
+              //   },
+              //   maxLength: {
+              //     value: 10,
+              //     msg: "10 caractères au maximum.",
+              //   },
+              // })}
+              // onKeyUp={() => {
+              //   trigger("password");
+              // }}
             />
+            {/* {errors.password && (
+              <p className="text-red-500">
+                {errors.password.msg}
+              </p>
+            )} */}
           </div>
 
           <div className="">
@@ -92,7 +153,7 @@ const SigninForme = () => {
             />
           </div>
           <div className="flex  mt-5">
-            <a href="/Login">tu as un compte?</a>
+            <Link to="/Login">tu as un compte?</Link>
           </div>
         </div>
       </form>
