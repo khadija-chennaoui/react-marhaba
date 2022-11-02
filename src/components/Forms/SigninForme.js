@@ -1,29 +1,17 @@
-import { useState } from "react";
-// import { useForm } from "react-hook-form";
+// import { useState } from "react";
 import { Link } from "react-router-dom";
 import Button from "../../Helpers/Button";
+import { useForm } from "react-hook-form";
+import { ErrorMessage } from '@hookform/error-message';
 import axios from "axios";
 
 const SigninForme = () => {
-  const [user, setUser] = useState({});
+  // const [user, setUser] = useState({});
 
-  // const { register, trigger, formState: { errors } } = useForm();
+  const { register, handleSubmit , formState: { errors } } = useForm();
 
-  function handleChnage(e){
-    
-    const val = e.target.value;
-    setUser({
-      ...user,
-      [e.target.name]: val,
-    });
-    
-  }
-
-  function  handleSubmit(e){
-    e.preventDefault();
-    
-    axios.post("http://localhost:4000/api/auth/registre", user)
-
+  const api = (data) => {
+    axios.post("http://localhost:4000/api/auth/registre", data)
       .then((res) => {
         if (res.data.message === "email Déja Existe") {
           document.getElementById("err").hidden = false;
@@ -35,48 +23,31 @@ const SigninForme = () => {
         }
       })
       .catch(Error=>console.log(Error));
-      
   }
 
   return (
     <div>
       <p id="err" className="bg-red-400 animate-pulse shadow appearance-none border rounded w-full py-2 px-4 mt-3 mb-5 text-gray-100 leading-tight focus:outline-none focus:shadow-outline" hidden ={true}></p>
-      <form className="" onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit(api)}>
         <div className="flex flex-col">
           <div className="mb-4">
-            <label
-              className="block text-gray-700 text-lg font-semibold mb-2 "
-              htmlFor="Email"
-            >
-              Fullname
-            </label>
+            <label className="block text-gray-700 text-lg font-semibold mb-2 " htmlFor="Email">Fullname</label>
             <input
-              onChange={handleChnage}
-              name="fullname"
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="fullname"
-              type="text"
-              // {...register("fullname", {
-              //   required: true,
-              //   pattern: {
-              //     value: /^[A-Za-z ]+$/i,
-              //     msg: "Name not valid",
-              //   },
-
-              //   minLength: {
-              //     value: 3,
-              //     msg: "entrez au moins 3 caractères. ",
-              //   },
-              // })}
-              // onKeyUp={() => {
-              //   trigger("fullname");
-              // }}
+              id="fullname" type="text"
+              {...register("fullname", {
+                required: 'Entre your fullname',
+                pattern: {
+                  value: /^[A-Za-z ]+$/i,
+                  msg: "Name not valid",
+                },
+                minLength: {
+                  value: 3,
+                  message: "entrez au moins 3 caractères. ",
+                },
+              })}
             />
-            {/* {errors.fullname && (
-              <p className="text-red-500">
-                {errors.fullname.msg}
-              </p>
-            )} */}
+            <div><ErrorMessage errors={errors} name="fullname"/></div>
             
           </div>
           <div className="mb-4">
@@ -87,28 +58,19 @@ const SigninForme = () => {
               Email
             </label>
             <input
-              onChange={handleChnage}
-              name="email"
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               id="email"
               type="email"
-              // {...register("email", {
-              //   required: true,
-              //   pattern: {
-              //     value:
-              //       /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-              //     msg: " email address non valid",
-              //   },
-              // })}
-              // onKeyUp={() => {
-              //   trigger("email");
-              // }}
+              {...register("email", {
+                required: 'Enter your email',
+                pattern: {
+                  value:/^\w.+@[a-zA-Z]+?.[a-zA-Z]{2,3}$/,
+                  message: 'Email incorrect'
+                },
+              })}
             />
-            {/* {errors.email && (
-              <p className="text-red-500">
-                {errors.email.msg}
-              </p>
-            )} */}
+            <div><ErrorMessage errors={errors} name="email"/></div>
+
           </div>
           <div className="mb-4">
             <label
@@ -118,31 +80,19 @@ const SigninForme = () => {
               Password
             </label>
             <input
-              onChange={handleChnage}
-              name="password"
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               id="password"
               type="password"
-              // {...register("password", {
-              //   required: true,
-              //   minLength: {
-              //     value: 8,
-              //     msg: "entrez au moins 8 caractères. ",
-              //   },
-              //   maxLength: {
-              //     value: 10,
-              //     msg: "10 caractères au maximum.",
-              //   },
-              // })}
-              // onKeyUp={() => {
-              //   trigger("password");
-              // }}
+              {...register("password", {
+                required: 'Enter your password',
+                minLength: {
+                  value: 4,
+                  msg: "entrez au moins 4 caractères. ",
+                }
+              })}
             />
-            {/* {errors.password && (
-              <p className="text-red-500">
-                {errors.password.msg}
-              </p>
-            )} */}
+            <div><ErrorMessage errors={errors} name="password"/></div>
+
           </div>
 
           <div className="">
