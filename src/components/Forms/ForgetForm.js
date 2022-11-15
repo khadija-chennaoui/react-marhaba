@@ -7,11 +7,12 @@ const ForgetForm = () => {
   function handleSubmit(e){
     e.preventDefault();
     axios.post("http://localhost:4000/api/auth/forgetpassword",user)
-    .then((res)=>console.log(res.data))
+    .then(res=>{
+      if(res.data) {
+        window.location.replace("/Login")
+      }
+    })
     .catch(error => console.log(error))
-
-
-
   }
   function handleChange(e){
     const val = e.target.value;
@@ -19,7 +20,7 @@ const ForgetForm = () => {
       ...user,
       [e.target.name]:val
     })
-    console.log(user)
+    // console.log(user)
 
   }
   return (
@@ -62,7 +63,7 @@ const ForgetForm = () => {
           <Button
             type="submit"
             className="group relative flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-2 focus:ring-indigo-500 mb-3 mt-4"
-            title="Sign in"
+            title=" Valide "
           />
         </div>
       </div>
