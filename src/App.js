@@ -3,7 +3,6 @@ import { Routes, Route } from "react-router-dom";
 import ForgetPassword from "./pages/front-office/auth/Forgetpassword";
 import Login from "./pages/front-office/auth/Login";
 import Signin from "./pages/front-office/auth/Signin";
-import Blog from "./components/Forms/Blog";
 import Client from "./pages/front-office/clients/Client";
 import Error from "./components/Error";
 import DashAdmin from "./components/DashAdmin";

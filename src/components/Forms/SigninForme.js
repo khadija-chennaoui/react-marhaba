@@ -1,4 +1,3 @@
-// import { useState } from "react";
 import { Link } from "react-router-dom";
 import Button from "../../Helpers/Button";
 import { useForm } from "react-hook-form";
@@ -6,7 +5,6 @@ import { ErrorMessage } from "@hookform/error-message";
 import axios from "axios";
 
 const SigninForme = () => {
-  // const [user, setUser] = useState({});
 
   const {
     register,
